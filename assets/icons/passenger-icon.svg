@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="10" height="4" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="passenger-icon" transform="translate(-529 -364)">
+    <rect id="Rectangle_380" data-name="Rectangle 380" width="24" height="24" transform="translate(553 388) rotate(180)" opacity="0"/>
+    <g id="Rectangle_138" data-name="Rectangle 138" transform="translate(530 371)" fill="none" stroke="#b882f6" stroke-width="2.4">
+      <rect width="22" height="14" rx="5" stroke="none"/>
+      <rect x="1.2" y="1.2" width="19.6" height="11.6" rx="3.8" fill="none"/>
+    </g>
+    <g id="Rectangle_139" data-name="Rectangle 139" transform="translate(534 371)" fill="none" stroke="#b882f6" stroke-width="2.4">
+      <path d="M2,0H12a2,2,0,0,1,2,2V3a4,4,0,0,1-4,4H4A4,4,0,0,1,0,3V2A2,2,0,0,1,2,0Z" stroke="none"/>
+      <path d="M2,1.2H12a.8.8,0,0,1,.8.8V3A2.8,2.8,0,0,1,10,5.8H4A2.8,2.8,0,0,1,1.2,3V2A.8.8,0,0,1,2,1.2Z" fill="none"/>
+    </g>
+    <line id="Line_40" data-name="Line 40" y2="3.573" transform="translate(539.257 375.5)" fill="none" stroke="#b882f6" stroke-linecap="round" stroke-width="2.4"/>
+    <line id="Line_41" data-name="Line 41" y2="3.573" transform="translate(543.524 375.5)" fill="none" stroke="#b882f6" stroke-linecap="round" stroke-width="2.4"/>
+    <g id="Scroll_Group_6" data-name="Scroll Group 6" transform="translate(536 367)" clip-path="url(#clip-path)" style="isolation: isolate">
+      <g id="Rectangle_140" data-name="Rectangle 140" fill="none" stroke="#b882f6" stroke-width="2.4">
+        <path d="M4,0H6a4,4,0,0,1,4,4V7a0,0,0,0,1,0,0H0A0,0,0,0,1,0,7V4A4,4,0,0,1,4,0Z" stroke="none"/>
+        <path d="M4,1.2H6A2.8,2.8,0,0,1,8.8,4v.6A1.2,1.2,0,0,1,7.6,5.8H2.4A1.2,1.2,0,0,1,1.2,4.6V4A2.8,2.8,0,0,1,4,1.2Z" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

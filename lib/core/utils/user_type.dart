@@ -1,0 +1,9 @@
+
+
+enum UserTypes{
+  DRIVER, 
+  PASSENGER, 
+}
+
+
+ 

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="typical-icon" transform="translate(-289 -376)">
+    <line id="Line_42" data-name="Line 42" x1="2.5" y2="2.291" transform="translate(291 388.5)" fill="none" stroke="#b882f6" stroke-linecap="round" stroke-width="2"/>
+    <line id="Line_43" data-name="Line 43" x2="2.5" y2="2.709" transform="translate(291 390.791)" fill="none" stroke="#b882f6" stroke-linecap="round" stroke-width="2"/>
+    <path id="Path_178" data-name="Path 178" d="M17.738,11.116l-20.456.048" transform="translate(293.845 379.771)" fill="none" stroke="#b882f6" stroke-linecap="round" stroke-width="2"/>
+    <line id="Line_42-2" data-name="Line 42" x2="2.5" y2="2.291" transform="translate(309.082 382.5)" fill="none" stroke="#b882f6" stroke-linecap="round" stroke-width="2"/>
+    <line id="Line_43-2" data-name="Line 43" x1="2.5" y2="2.709" transform="translate(309.082 384.791)" fill="none" stroke="#b882f6" stroke-linecap="round" stroke-width="2"/>
+    <path id="Path_178-2" data-name="Path 178" d="M-2.718,11.116l20.456.048" transform="translate(293.718 373.771)" fill="none" stroke="#b882f6" stroke-linecap="round" stroke-width="2"/>
+    <rect id="Rectangle_382" data-name="Rectangle 382" width="24" height="24" transform="translate(289 376)" opacity="0"/>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="driver-icon" transform="translate(-502 -373)">
+    <g id="Ellipse_66" data-name="Ellipse 66" transform="translate(504 375)" fill="none" stroke="#aeaeae" stroke-width="2.4">
+      <circle cx="9.5" cy="9.5" r="9.5" stroke="none"/>
+      <circle cx="9.5" cy="9.5" r="8.3" fill="none"/>
+    </g>
+    <path id="Path_177" data-name="Path 177" d="M-1.131-.245l7.686,1.89" transform="translate(506.929 381.833)" fill="none" stroke="#aeaeae" stroke-linecap="round" stroke-width="2.4"/>
+    <line id="Line_38" data-name="Line 38" x1="7.576" y2="1.684" transform="translate(513.484 381.794)" fill="none" stroke="#aeaeae" stroke-linecap="round" stroke-width="2.4"/>
+    <line id="Line_39" data-name="Line 39" y2="10.101" transform="translate(513.484 382.636)" fill="none" stroke="#aeaeae" stroke-width="2.4"/>
+    <g id="Ellipse_67" data-name="Ellipse 67" transform="translate(510 380)" fill="#aeaeae" stroke="#aeaeae" stroke-width="1">
+      <circle cx="3.5" cy="3.5" r="3.5" stroke="none"/>
+      <circle cx="3.5" cy="3.5" r="3" fill="none"/>
+    </g>
+    <rect id="Rectangle_380" data-name="Rectangle 380" width="24" height="24" transform="translate(526 397) rotate(180)" opacity="0"/>
+  </g>
+</svg>

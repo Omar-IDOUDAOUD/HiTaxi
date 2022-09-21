@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="coins-icon" transform="translate(-230 -360)">
+    <rect id="Rectangle_385" data-name="Rectangle 385" width="20" height="20" transform="translate(230 360)" opacity="0"/>
+    <circle id="Ellipse_35" data-name="Ellipse 35" cx="5.5" cy="5.5" r="5.5" transform="translate(239 369)" fill="#e9b231"/>
+    <circle id="Ellipse_36" data-name="Ellipse 36" cx="6" cy="6" r="6" transform="translate(236 365)" fill="#fabd30"/>
+    <circle id="Ellipse_34" data-name="Ellipse 34" cx="6" cy="6" r="6" transform="translate(233 368)" fill="#ffc746"/>
+  </g>
+</svg>
