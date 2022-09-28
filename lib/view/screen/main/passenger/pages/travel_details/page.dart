@@ -126,6 +126,8 @@ class _TravelDetailsState extends State<TravelDetails> {
   }
 }
 
+///////////////////
+
 class FloatingButton extends StatefulWidget {
   FloatingButton({
     Key? key,
@@ -148,8 +150,7 @@ class _FloatingButtonState extends State<FloatingButton> {
   double _sendRequestButtonOpacity = 0.0;
   bool _countactButtonState = false;
 
-  bool x = false;
-
+  bool x = false; 
   final Duration _animationDur = AnimationsCst.adrc;
   final Duration _opacityAnDur = AnimationsCst.adrc ~/ 2;
 
@@ -220,6 +221,8 @@ class _FloatingButtonState extends State<FloatingButton> {
     );
   }
 }
+
+//////////////////
 
 class _Content extends StatefulWidget {
   const _Content({Key? key}) : super(key: key);
