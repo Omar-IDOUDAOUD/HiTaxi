@@ -1,4 +1,6 @@
-class RoutesCst {
+abstract class RoutesCst {
+
+  RoutesCst._(); 
   static const String introduction = "/intro";
   static const String singup = "/sing/singup";
   static const String singin = "/sing/singin";

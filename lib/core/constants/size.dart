@@ -1,6 +1,8 @@
  
 
-class SizesCst {
+abstract class SizesCst {
+SizesCst._(); 
+
   ///font sizes
   static const double ftsf = 30;
   static const double ftsa = 24;

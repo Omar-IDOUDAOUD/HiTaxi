@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-class FontsCst {
+abstract class FontsCst {
+  FontsCst._(); 
   // font weight
   static const FontWeight wfa = FontWeight.w500;
   static const FontWeight wfg = FontWeight.w600;

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hitaxi/core/utils/hexcolor_extention.dart';
 
-class ColorsCst {
+abstract  class ColorsCst {
+  ColorsCst._(); 
+  
   /// Light theme colors
 
   /** backround color */

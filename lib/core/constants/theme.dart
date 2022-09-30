@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hitaxi/core/constants/color.dart';
 
-class ThemesCst {
+abstract class ThemesCst {
+ThemesCst._(); 
+
+
   static ThemeData light = new ThemeData(
     backgroundColor: ColorsCst.clral,
     fontFamily: "Arial",

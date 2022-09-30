@@ -29,7 +29,7 @@ class HiTaxi extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemesCst.light,
       darkTheme: ThemesCst.dark,
-      initialRoute: RoutesCst.singup,
+      initialRoute: RoutesCst.mainPassenger,
       defaultTransition: Transition.cupertinoDialog,
       transitionDuration: 500.milliseconds,
       getPages: [

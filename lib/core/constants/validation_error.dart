@@ -1,7 +1,10 @@
 
 
 
-class ValidationErrorsCst {
+abstract class ValidationErrorsCst {
+  ValidationErrorsCst._(); 
+  
+  
   /// USER NAME
   static const userNameNotTyped = {
     "title": "user name not valid",

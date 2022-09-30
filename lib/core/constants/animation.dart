@@ -1,6 +1,7 @@
 import 'package:flutter/animation.dart';
 
-  class AnimationsCst {
+ abstract class AnimationsCst {
+  AnimationsCst._(); 
   /// durations
   static const Duration adra = Duration(milliseconds: 400); //400
   static const Duration adrb = Duration(milliseconds: 200); //200
