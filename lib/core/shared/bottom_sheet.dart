@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hitaxi/core/constants/constants.dart';
 
 class BottomSheetScreen {
+  final _animatingDuration = 200.milliseconds;
   BottomSheetScreen(Widget child, {BottomSheetTopBar? topBar}) {
     print(Get.bottomBarHeight);
     Get.bottomSheet(
@@ -14,6 +15,8 @@ class BottomSheetScreen {
         ),
       ),
       backgroundColor: Get.theme.backgroundColor,
+      exitBottomSheetDuration: _animatingDuration,
+      enterBottomSheetDuration: _animatingDuration,
     );
   }
 
@@ -60,8 +63,6 @@ class _BottomSheet extends StatefulWidget {
   @override
   State<_BottomSheet> createState() => __BottomSheetState();
 }
-
-
 
 class __BottomSheetState extends State<_BottomSheet> {
   final _greyColor = Colors.grey.withOpacity(.2);
