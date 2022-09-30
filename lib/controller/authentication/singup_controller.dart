@@ -100,7 +100,7 @@ class SingUpController extends GetxController {
   }
 
   void goSingIn() {
-    Get.offAndToNamed(RoutesCst.singin);
+    Get.toNamed(RoutesCst.singin);
   }
 
   bool _checkLogicalOperations() {

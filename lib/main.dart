@@ -29,38 +29,34 @@ class HiTaxi extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemesCst.light,
       darkTheme: ThemesCst.dark,
-      initialRoute: RoutesCst.mainPassenger,
+      initialRoute: RoutesCst.singup,
+      defaultTransition: Transition.cupertinoDialog,
+      transitionDuration: 500.milliseconds,
       getPages: [
         GetPage(
           name: RoutesCst.singin,
           page: () => SingIn(),
           binding: SingInBinging(),
           title: 'Login',
-          // transition: Transition.cupertino,
         ),
         GetPage(
           name: RoutesCst.singup,
           page: () => SingUp(),
           binding: SingUpBinging(),
-          // transition: Transition.cupertino
-          // transition,
         ),
         GetPage(
           name: RoutesCst.mainPassenger,
           page: () => PassengerHome.Home(),
           binding: PassengerBinding(),
-          // transition: Transition.cupertino,
         ),
-        GetPage(
-            name: RoutesCst.mainPassengerTravelDetails,
-            page: () => PassengerTravelDetail.TravelDetails(),
-            arguments: {'arg': 'this an arg'}
-            // transition: Transition.cupertino,
-            ),
+        GetPage(  
+          name: RoutesCst.mainPassengerTravelDetails,
+          page: () => PassengerTravelDetail.TravelDetails(),
+          arguments: {'arg': 'this an arg'},
+        ),
         GetPage(
           name: RoutesCst.testFrame,
           page: () => TestPage(),
-          // transition: Transition.cupertino,
         ),
       ],
     );

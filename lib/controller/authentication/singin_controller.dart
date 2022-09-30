@@ -22,10 +22,10 @@ class SingInController extends GetxController {
 
   void next() {
     /* send request */
-    _goMain("PASSENGER"); 
+    _goMain("PASSENGER");
   }
 
   void goSingUp() {
-    Get.offAndToNamed(RoutesCst.singup);
+    Get.back(); 
   }
 }
