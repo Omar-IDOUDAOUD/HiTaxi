@@ -87,6 +87,7 @@ class _AmpereItemsMenuState extends State<AmpereItemsMenu>
                   elevation: 20,
                   clipBehavior: Clip.antiAlias,
                   child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
                     itemCount: widget.items.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) => _MenuItem(
