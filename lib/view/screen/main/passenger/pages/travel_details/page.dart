@@ -27,7 +27,7 @@ class _TravelDetailsState extends State<TravelDetails> {
   @override
   void initState() {
     // TODO: implement initState
-    _scrollController = ScrollController(initialScrollOffset: -200)
+    _scrollController = ScrollController()
       ..addListener(
         () {
           final offset = _scrollController.offset;
@@ -48,98 +48,91 @@ class _TravelDetailsState extends State<TravelDetails> {
       floatingActionButton: FloatingButton(
         onCountactRequestEvent: () {},
         onTravelRequestEvent: () {},
-        onOpenOptions: () {},
-        isOpen: false,
+        scrollController: _scrollController,
       ),
       backgroundColor: ColorsCst.clrab,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Positioned(
-              top: -20,
-              right: -20,
-              child: CircleAvatar(
-                backgroundColor: Colors.black54.withOpacity(.1),
-                radius: 25,
-              ),
+      body: Stack(
+        children: [
+          Positioned(
+            top: -20,
+            right: -20,
+            child: CircleAvatar(
+              backgroundColor: Colors.black54.withOpacity(.1),
+              radius: 25,
             ),
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: SizedBox(
-                height: _extendBottomSpaceHeight,
-                child: ColoredBox(
-                  color: Get.theme.backgroundColor,
-                ),
-              ),
-            ),
-            Positioned.fill(
-              child: SingleChildScrollView(
-                controller: _scrollController,
-                physics: BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: _topBarSpace,
-                    ),
-                    Container(
-                      constraints: BoxConstraints(
-                        minHeight: Get.size.height - _topBarSpace + 1,
-                      ),
-                      width: Get.size.width,
-                      decoration: BoxDecoration(
-                        color: Get.theme.backgroundColor,
-                        borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(_radius)),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0, -20),
-                            color: Colors.black54.withOpacity(.1),
-                            blurRadius: 30,
-                          ),
-                        ],
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Column(
-                        children: [_Content()],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              top: 0,
-              height: _topBarSpace,
-              left: 0,
-              right: 0,
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: SizedBox(
+              height: _extendBottomSpaceHeight,
               child: ColoredBox(
-                color: Colors.transparent,
-                child: TopBar(showTopBarElements: _showTopBarElements),
+                color: Get.theme.backgroundColor,
               ),
             ),
-          ],
-        ),
+          ),
+          Positioned.fill(
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: _topBarSpace,
+                  ),
+                  Container(
+                    constraints: BoxConstraints(
+                      minHeight: Get.size.height - _topBarSpace + 1,
+                    ),
+                    width: Get.size.width,
+                    decoration: BoxDecoration(
+                      color: Get.theme.backgroundColor,
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(_radius)),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(0, -20),
+                          color: Colors.black54.withOpacity(.1),
+                          blurRadius: 30,
+                        ),
+                      ],
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      children: [_Content()],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            height: _topBarSpace,
+            left: 0,
+            right: 0,
+            child: ColoredBox(
+              color: Colors.transparent,
+              child: TopBar(showTopBarElements: _showTopBarElements),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
-
-///////////////////
 
 class FloatingButton extends StatefulWidget {
   FloatingButton({
     Key? key,
     required this.onTravelRequestEvent,
     required this.onCountactRequestEvent,
-    required this.onOpenOptions,
-    this.isOpen = false,
+    required this.scrollController,
   }) : super(key: key);
   final Function onTravelRequestEvent;
   final Function onCountactRequestEvent;
-  final Function onOpenOptions;
-  bool isOpen;
+  final ScrollController scrollController;
 
   @override
   State<FloatingButton> createState() => _FloatingButtonState();
@@ -147,76 +140,137 @@ class FloatingButton extends StatefulWidget {
 
 class _FloatingButtonState extends State<FloatingButton> {
   bool _sendRequestButtonState = false;
-  double _sendRequestButtonOpacity = 0.0;
-  bool _countactButtonState = false;
 
-  bool x = false; 
-  final Duration _animationDur = AnimationsCst.adrc;
-  final Duration _opacityAnDur = AnimationsCst.adrc ~/ 2;
-
-  void _openButtons() {
-    if (!_sendRequestButtonState) return _closeButtons();
-    setState(() async {
-      _sendRequestButtonState = true;
-      await Future.delayed(_opacityAnDur);
-      _sendRequestButtonOpacity = 1.0;
-      await Future.delayed(_animationDur - _opacityAnDur);
-      _countactButtonState = true;
+  final Duration _anDur = 600.milliseconds; 
+  @override
+  void initState() {
+    widget.scrollController.addListener(() {
+      if (this._sendRequestButtonState)
+        setState(() { 
+          _sendRequestButtonState = false;
+        });
     });
   }
 
-  void _closeButtons() {}
+  Future<void> _openButtons() async {  
+    setState(() {
+      _sendRequestButtonState = true;
+    });
+  }
+
+  void _closeButtons() { 
+    setState(() {
+      _sendRequestButtonState = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.loose,
-      children: [
-        // send req button
+      children: [ 
         AnimatedPositioned(
-          duration: _animationDur,
+          duration: _anDur,
           curve: AnimationsCst.acra,
           width: _sendRequestButtonState ? Get.size.width - 33 : 0,
           height: _sendRequestButtonState ? 70 : 50,
           right: _sendRequestButtonState ? 0 : 20,
-          bottom: _sendRequestButtonState ? 0 : 5,
+          bottom: _sendRequestButtonState ? 00 : 0,
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              _closeButtons();
+            },
             elevation: 0,
             shape: RoundedRectangleBorder(
                 borderRadius:
                     BorderRadius.circular(_sendRequestButtonState ? 20 : 50)),
+            color: Colors.transparent,
+            focusElevation: 0,
+            hoverElevation: 0,
+            highlightElevation: 0,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  Text(
+                    "COUNTACT",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: ColorsCst.clrab,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  SvgPicture.asset(
+                    AssetsExplorer.icon('message-circle-outline.svg'),
+                    height: 20,
+                    color: ColorsCst.clrab,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ), 
+        AnimatedPositioned(
+          duration: _anDur,
+          curve: AnimationsCst.acra,
+          width: _sendRequestButtonState ? Get.size.width - 33 : 60,
+          height: _sendRequestButtonState ? 70 : 60,
+          right: _sendRequestButtonState ? 0 : 0,
+          bottom: _sendRequestButtonState ? 80 : 0,
+          child: MaterialButton(
+            padding: EdgeInsets.symmetric(horizontal: Get.size.width / 4),
+            onPressed: () {
+              _closeButtons();
+            },
+            elevation: 0,
+            focusElevation: 0,
+            hoverElevation: 0,
+            highlightElevation: 0,
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(_sendRequestButtonState ? 20 : 50)),
             color: ColorsCst.clrab,
-            child: AnimatedOpacity(
-              duration: _opacityAnDur,
-              opacity: _sendRequestButtonOpacity,
-              child: Text("SEND RESUEST"),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Text(
+                "SEND RESUEST",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         ),
         // short Button
+
         AnimatedPositioned(
-          duration: AnimationsCst.adrb,
+          duration: _anDur,
           curve: AnimationsCst.acra,
-          height: x ? 60 : 10,
-          bottom: x ? 0 : 25,
-          right: 0,
+          height: _sendRequestButtonState ? 45 : 60,
+          bottom: _sendRequestButtonState ? 92.5 : 0,
+          right: _sendRequestButtonState ? Get.size.width / 8.5 : 0,
           child: InkWell(
             onTap: () {
-              setState(() {
-                _openButtons();
-              });
+              _openButtons();
             },
             hoverColor: Colors.red,
             child: CircleAvatar(
               radius: 30,
-              backgroundColor: ColorsCst.clrab,
+              backgroundColor: _sendRequestButtonState
+                  ? ColorsCst.clrab.withGreen(230)
+                  : ColorsCst.clrab,
               child: SvgPicture.asset(
                 AssetsExplorer.icon('paper-plane-up-outline.svg'),
                 color: Colors.white,
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
