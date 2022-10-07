@@ -2,6 +2,8 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hitaxi/core/class/AmpereDesingPackage/clickable.dart';
+import 'package:hitaxi/core/class/AmpereDesingPackage/squar_button.dart';
 import 'package:hitaxi/core/constants/constants.dart';
 import 'package:hitaxi/core/shared/bottom_sheet.dart';
 import 'package:hitaxi/core/utils/assets_explorer.dart';
@@ -18,19 +20,52 @@ class TopBar extends StatefulWidget {
   State<TopBar> createState() => _TopBarState();
 }
 
-class _AppLogo {
-  const _AppLogo({required this.pictureUrl,required this.shadowColor}); 
-  final String pictureUrl; 
-  final Color shadowColor; 
+class _AppLogoModel {
+  const _AppLogoModel({required this.pictureUrl, required this.shadowColor});
+  final String pictureUrl;
+  final Color shadowColor;
+}
+
+class _AppLogo extends StatelessWidget {
+  const _AppLogo({Key? key, required this.model}) : super(key: key);
+  final _AppLogoModel model;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.square(
+      dimension: 50,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: model.shadowColor.withOpacity(.2),
+              offset: Offset(0, 3),
+              blurRadius: 15,
+            ),
+          ],
+          image: DecorationImage(
+            image: AssetImage(
+              model.pictureUrl,
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
   late AnimationController _anCtrl;
   late Animation<Offset> _an;
 
-  List<_AppLogo> get _countactAppsLogos => [
-    _AppLogo(pictureUrl: AssetsExplorer.image(''), shadowColor: Colors.amber, )
-  ];
+  List<_AppLogoModel> get _externeAppsLogosModels => [
+        _AppLogoModel(
+          pictureUrl: AssetsExplorer.image('app-icon.png'),
+          shadowColor: Colors.amber,
+        )
+      ];
   @override
   void initState() {
     // TODO: implement initState
@@ -39,17 +74,16 @@ class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
       vsync: this,
       duration: AnimationsCst.adrb,
     );
-    _an =
-        Tween(begin: Offset(Get.size.width / 3, 0), end: Offset(0, 0)).animate(
-      CurvedAnimation(
-        parent: _anCtrl,
-        curve: Curves.easeOutBack,
-      )
-    )..addListener(() {
-            setState(() {});
-          });
+    _an = Tween(begin: Offset(Get.size.width / 3, 0), end: Offset(0, 0))
+        .animate(CurvedAnimation(
+      parent: _anCtrl,
+      curve: Curves.easeOutBack,
+    ))
+      ..addListener(() {
+        setState(() {});
+      });
     // _anCtrl.forward();
-  } 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,28 +135,110 @@ class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
               offset: _an.value,
               child: MaterialButton(
                 onPressed: () => BottomSheetScreen(
-                    Wrap(
-                      children: List<Widget>.generate(
-                        8,
-                        (index) => 
-                        //
-                        SizedBox.square(
-                          dimension: 50,
-                          child: ColoredBox(
-                            color: Colors.green,
+                  LimitedBox(
+                    maxHeight: Get.size.height * .7,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          CountactOptionFram(
+                            title: 'External apps',
+                            body: Row(
+                              children: [
+                                _AppLogo(
+                                  model: _externeAppsLogosModels.first,
+                                ),
+                                SizedBox(width: 10),
+                                _AppLogo(
+                                  model: _externeAppsLogosModels.first,
+                                ),
+                                SizedBox(width: 10),
+                                _AppLogo(
+                                  model: _externeAppsLogosModels.first,
+                                ),
+                              ],
+                            ),
+                            // withCopy: false,
                           ),
-                        ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          CountactOptionFram(
+                            title: 'Phone number',
+                            body: Row(
+                              children: [
+                                Tooltip(
+                                  message: 'Copied!',
+                                  preferBelow: false,
+                                  textStyle: TextStyle(
+                                    fontWeight: FontsCst.wfc,
+                                  ),
+                                  child: Text(
+                                    "+212554487796",
+                                    style: TextStyle(
+                                      color: Get.theme.colorScheme.primary,
+                                      fontSize: SizesCst.ftsj,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                ),
+                                Spacer(),
+                                _callButtonn(),
+                              ],
+                            ),
+                            withCopy: true,
+                            onCopy: () {},
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          CountactOptionFram(
+                            title: 'Email',
+                            body: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Tooltip(
+                                    message: 'Copied!',
+                                    preferBelow: false,
+                                    textStyle: TextStyle(
+                                      fontWeight: FontsCst.wfc,
+                                    ),
+                                    child: Text(
+                                      "emailexample@email.ex",
+                                      style: TextStyle(
+                                        color: Get.theme.colorScheme.primary,
+                                        fontSize: SizesCst.ftsj,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: _emailButtone(),
+                                ),
+                              ],
+                            ),
+                            withCopy: true,
+                            onCopy: () {},
+                          ),
+                          SizedBox(
+                            height: 100,
+                          ),
+                        ],
                       ),
-                      spacing: 10,
-                      runSpacing: 10,
-                    ),
-                    topBar: BottomSheetTopBar(
-                      title: "Countact options",
-                      withTopResizeBars: true,
-                      hasConfirm: false,
-                      hasDiscard: false,
                     ),
                   ),
+                  topBar: BottomSheetTopBar(
+                    title: "Countact options",
+                    withTopResizeBars: true,
+                    hasConfirm: false,
+                    hasDiscard: false,
+                  ),
+                ),
                 minWidth: 65,
                 height: 65,
                 shape: CircleBorder(),
@@ -135,6 +251,153 @@ class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _callButtonn() => AmpereClickable(
+        builder: (focus) {
+          return SizedBox.square(
+            dimension: 37,
+            child: AnimatedContainer(
+              duration: focus ? 10.milliseconds : 100.milliseconds,
+              curve: AnimationsCst.acra,
+              decoration: BoxDecoration(
+                color: focus
+                    ? ColorsCst.clrs.withOpacity(.4)
+                    : ColorsCst.clrs.withOpacity(.2),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: SvgPicture.asset(
+                AssetsExplorer.icon('phone-outline.svg'),
+                fit: BoxFit.scaleDown,
+                color: ColorsCst.clrs,
+              ),
+            ),
+          );
+        },
+      );
+
+  Widget _emailButtone() => AmpereClickable(
+        builder: (focus) {
+          return SizedBox(
+            height: 37,
+            child: AnimatedContainer(
+              duration: focus ? 10.milliseconds : 100.milliseconds,
+              curve: AnimationsCst.acra,
+              decoration: BoxDecoration(
+                color: focus
+                    ? ColorsCst.clrs.withOpacity(.4)
+                    : ColorsCst.clrs.withOpacity(.2),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      AssetsExplorer.icon('email-outline.svg'),
+                      fit: BoxFit.scaleDown,
+                      color: ColorsCst.clrs,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Open Email',
+                      style: TextStyle(
+                        fontSize: SizesCst.ftsg,
+                        fontWeight: FontsCst.wfb,
+                        color: ColorsCst.clrs,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+}
+
+class CountactOptionFram extends StatelessWidget {
+  const CountactOptionFram(
+      {Key? key,
+      this.withCopy = false,
+      required this.body,
+      this.onCopy,
+      required this.title})
+      : super(key: key);
+  final bool withCopy;
+  final Function()? onCopy;
+  final String title;
+  final Widget body;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(30, 15, 30, 20),
+      decoration: BoxDecoration(
+        color: Colors.grey.withOpacity(.10),
+        borderRadius: BorderRadius.circular(25),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontsCst.wfc,
+                  color: Get.theme.colorScheme.primary,
+                  fontSize: SizesCst.ftsh,
+                ),
+              ),
+              Spacer(),
+              if (withCopy)
+                InkWell(
+                  borderRadius: BorderRadius.circular(10),
+                  onTap: onCopy,
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        AssetsExplorer.icon('email-outline.svg'),
+                        height: 15,
+                        color: ColorsCst.clrm,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'copy',
+                        style: TextStyle(
+                          color: ColorsCst.clrm,
+                          fontSize: SizesCst.ftsh,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+            ],
+          ),
+          SizedBox(
+            height: 7.5,
+          ),
+          Divider(
+            color: Get.theme.colorScheme.secondary,
+            // height: 0.5,
+            thickness: .8,
+            height: .1,
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          body,
+          SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
     );
   }
 }

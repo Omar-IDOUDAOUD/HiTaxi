@@ -17,6 +17,7 @@ class BottomSheetScreen {
       backgroundColor: Get.theme.backgroundColor,
       exitBottomSheetDuration: _animatingDuration,
       enterBottomSheetDuration: _animatingDuration,
+      isScrollControlled: true,
     );
   }
 
