@@ -487,47 +487,64 @@ class _TrolleyImagesState extends State<TrolleyImages> {
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
       itemBuilder: (ctx, i) {
-        return OpenContainer(
-          closedShape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          closedBuilder: (ctx, action) => TrolleyImage(
-            onTap: () {
-              _initViwerController(i);
-              action();
-            },
-            imageLink: AssetsExplorer.image('app-icon.png'),
-          ),
-          middleColor: Colors.transparent,
-          openColor: Colors.transparent,
-          closedColor: Colors.transparent,
-          openElevation: 0,
-          closedElevation: 0,
-          openBuilder: (ctx, action) => Scaffold(
-            backgroundColor: ColorsCst.clrad,
-            body: GestureDetector(
-              onTap: () {
-                _disposeViwerController().then((value) => action());
-              },
-              child: ColoredBox(
-                color: Colors.transparent,
-                child: Center(
-                  child: PageView.builder(
-                    controller: _viewerController,
-                    itemCount: widget.imagesUrls.length,
-                    itemBuilder: (ctx, i) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        AssetsExplorer.image('app-icon.png'),
-                        fit: BoxFit.contain,
+        return TrolleyImage(
+          onTap: () {
+            _initViwerController(i);
+            Get.to(
+              Scaffold(
+                backgroundColor: ColorsCst.clrad,
+                body: Stack(
+                  children: [
+                    Positioned.fill(
+                      bottom: 0,
+                      top: 0,
+                      child: PageView.builder(
+                        controller: _viewerController,
+                        itemCount: widget.imagesUrls.length,
+                        itemBuilder: (ctx, i) => Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            AssetsExplorer.image('app-icon.png'),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        physics: BouncingScrollPhysics(),
                       ),
                     ),
-                    physics: BouncingScrollPhysics(),
-                  ),
+                    Positioned(
+                      right: 0,
+                      left: 0,
+                      top: 0,
+                      child: ColoredBox(
+                        color: Colors.black54.withOpacity(.1),
+                        child: SizedBox(
+                          height: 70,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 25),
+                            child: Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () => _disposeViwerController()
+                                      .then((value) => Get.back()),
+                                  child: SvgPicture.asset(
+                                    AssetsExplorer.icon('back-icon.svg'),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ),
+              transition: Transition.cupertino,
+              duration: 300.milliseconds,
+            );
+          },
+          imageLink: AssetsExplorer.image('app-icon.png'),
         );
       },
       separatorBuilder: (ctx, v) => SizedBox(width: 5),
