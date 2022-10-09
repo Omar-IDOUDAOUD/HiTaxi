@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,7 +8,9 @@ import 'package:hitaxi/core/class/AmpereDesingPackage/clickable.dart';
 import 'package:hitaxi/core/class/AmpereDesingPackage/squar_button.dart';
 import 'package:hitaxi/core/constants/constants.dart';
 import 'package:hitaxi/core/shared/bottom_sheet.dart';
+import 'package:hitaxi/core/shared/dialog_screen.dart';
 import 'package:hitaxi/core/utils/assets_explorer.dart';
+import 'package:hitaxi/view/screen/main/shared_widgets.dart';
 
 class TopBar extends StatefulWidget {
   const TopBar({
@@ -436,6 +440,239 @@ class _OpenDriverAccountButtonState extends State<OpenDriverAccountButton> {
         ? Get.theme.colorScheme.surface.withOpacity(.2)
         : Get.theme.colorScheme.surface.withOpacity(.5);
     return GestureDetector(
+      onTap: () {
+        DialogScreen(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Dr. Fraid Alyino',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: SizesCst.ftsj,
+                        fontWeight: FontsCst.wfc,
+                        color: Get.theme.colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    height: 85,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        color: ColorsCst.clrz,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: ClipOval(
+                          child: Image.asset(
+                            AssetsExplorer.image('driver-person-profile.png'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 20,
+                        width: 150,
+                        child: Stack(
+                          // fit: StackFit.loose,
+                          children: [
+                            ...List.generate(
+                              4 + 1,
+                              (index) => Positioned(
+                                top: 0,
+                                left: index * 10,
+                                child: Container(
+                                  height: 20,
+                                  padding: EdgeInsets.all(2),
+                                  constraints: BoxConstraints(minWidth: 20),
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(25 / 2),
+                                    // border:
+                                    //     Border.all(color: Colors.white, width: 3),
+                                  ),
+                                  child: index == 4
+                                      ? Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 5.0),
+                                            child: Text(
+                                              '20+',
+                                              style: TextStyle(
+                                                color: ColorsCst.clrab,
+                                                fontSize: SizesCst.ftsk,
+                                                fontWeight: FontsCst.wfb,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      : ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(25 / 2),
+                                          child: Image.asset(
+                                            AssetsExplorer.image(
+                                                'app-icon.png'),
+                                          ),
+                                        ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        '24 conveyance getted',
+                        style: TextStyle(
+                          color: Get.theme.colorScheme.primary,
+                          fontSize: SizesCst.ftsk,
+                          fontWeight: FontsCst.wfb,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      RateRow(rate: 3),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: '2.5',
+                              style: TextStyle(
+                                color: Get.theme.colorScheme.primary,
+                                fontSize: SizesCst.ftsc,
+                                fontWeight: FontsCst.wfb,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' stars',
+                              style: TextStyle(
+                                color: Get.theme.colorScheme.primary,
+                                fontSize: SizesCst.ftsk,
+                                fontWeight: FontsCst.wfb,
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(
+                        5,
+                        (index) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 2),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: List.generate(
+                              5 - index,
+                              (index2) => SvgPicture.asset(
+                                AssetsExplorer.icon('star.svg'),
+                                height: 14,
+                                color: Get.theme.colorScheme.secondary,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: List.generate(
+                          5,
+                          (index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 3.8),
+                            child: Container(
+                              height: 10,
+                              decoration: BoxDecoration(
+                                color: Get.theme.colorScheme.secondary
+                                    .withOpacity(.5),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: (20.5).ceil(),
+                                    child: Container(
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        color: ColorsCst.clrab,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                    ),
+                                  ),
+                                  Spacer(
+                                    flex: (80.5).ceil(),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: List.generate(
+                          5,
+                          (index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 2.3),
+                            child: Text(
+                              '${2 * index + 2}0%',
+                              style: TextStyle(
+                                color: Get.theme.colorScheme.secondary,
+                                fontSize: SizesCst.ftsd,
+                                fontWeight: FontsCst.wfb,
+                              ),
+                            ),
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+              // SizedBox(
+              //   height: 15,
+              // ),
+            ],
+          ),
+          hasConfirm: false,
+        );
+      },
       onTapUp: (dts) => setState(() => _isFocus = false),
       onTapDown: (dts) => setState(() => _isFocus = true),
       onTapCancel: () => setState(() => _isFocus = false),

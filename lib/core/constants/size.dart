@@ -12,6 +12,7 @@ SizesCst._();
   static const double ftsc = 15;
   static const double ftsj = 16;
   static const double ftsd = 11;
+  static const double ftsk = 9;
   static const double ftsh = 12;
   static const double ftsg = 13.5;
 
