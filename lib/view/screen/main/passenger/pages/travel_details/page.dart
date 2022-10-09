@@ -418,7 +418,7 @@ class __ContentState extends State<_Content> {
               Row(
                 children: [
                   CentredCircles(
-                    color: Colors.greenAccent,
+                    color: Colors.redAccent,
                   ),
                   SizedBox(
                     width: 10,
@@ -462,7 +462,7 @@ class __ContentState extends State<_Content> {
               Row(
                 children: [
                   CentredCircles(
-                    color: Colors.red,
+                    color: Colors.greenAccent,
                   ),
                   SizedBox(
                     width: 10,
