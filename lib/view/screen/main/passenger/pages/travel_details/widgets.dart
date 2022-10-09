@@ -77,7 +77,7 @@ class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
     _an = Tween(begin: Offset(Get.size.width / 3, 0), end: Offset(0, 0))
         .animate(CurvedAnimation(
       parent: _anCtrl,
-      curve: Curves.easeOutBack,
+      curve: Curves.linearToEaseOut,
     ))
       ..addListener(() {
         setState(() {});
@@ -238,6 +238,7 @@ class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
                     hasConfirm: false,
                     hasDiscard: false,
                   ),
+                  animationDuration: 200.milliseconds,
                 ),
                 minWidth: 65,
                 height: 65,
@@ -318,6 +319,23 @@ class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
           );
         },
       );
+}
+
+class CentredCircles extends StatelessWidget {
+  const CentredCircles({Key? key, required this.color}) : super(key: key);
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: 8.5,
+      backgroundColor: color.withOpacity(.5),
+      child: CircleAvatar(
+        radius: 3.5,
+        backgroundColor: color,
+      ),
+    );
+  }
 }
 
 class CountactOptionFram extends StatelessWidget {

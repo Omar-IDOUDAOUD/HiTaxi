@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import 'package:hitaxi/core/constants/constants.dart';
 
 class BottomSheetScreen {
-  final _animatingDuration = 200.milliseconds;
-  BottomSheetScreen(Widget child, {BottomSheetTopBar? topBar}) {
+  final _animatingDuration = 100.milliseconds;
+  BottomSheetScreen(Widget child,
+      {BottomSheetTopBar? topBar, Duration? animationDuration}) {
     print(Get.bottomBarHeight);
     Get.bottomSheet(
       _BottomSheet(child: child, topBar: topBar),
@@ -15,8 +16,8 @@ class BottomSheetScreen {
         ),
       ),
       backgroundColor: Get.theme.backgroundColor,
-      exitBottomSheetDuration: _animatingDuration,
-      enterBottomSheetDuration: _animatingDuration,
+      exitBottomSheetDuration: animationDuration ?? _animatingDuration,
+      enterBottomSheetDuration: animationDuration ?? _animatingDuration,
       isScrollControlled: true,
     );
   }

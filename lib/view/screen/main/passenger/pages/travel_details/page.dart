@@ -141,24 +141,24 @@ class FloatingButton extends StatefulWidget {
 class _FloatingButtonState extends State<FloatingButton> {
   bool _sendRequestButtonState = false;
 
-  final Duration _anDur = 600.milliseconds; 
+  final Duration _anDur = 300.milliseconds;
   @override
   void initState() {
     widget.scrollController.addListener(() {
       if (this._sendRequestButtonState)
-        setState(() { 
+        setState(() {
           _sendRequestButtonState = false;
         });
     });
   }
 
-  Future<void> _openButtons() async {  
+  Future<void> _openButtons() async {
     setState(() {
       _sendRequestButtonState = true;
     });
   }
 
-  void _closeButtons() { 
+  void _closeButtons() {
     setState(() {
       _sendRequestButtonState = false;
     });
@@ -168,7 +168,7 @@ class _FloatingButtonState extends State<FloatingButton> {
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.loose,
-      children: [ 
+      children: [
         AnimatedPositioned(
           duration: _anDur,
           curve: AnimationsCst.acra,
@@ -213,7 +213,7 @@ class _FloatingButtonState extends State<FloatingButton> {
               ),
             ),
           ),
-        ), 
+        ),
         AnimatedPositioned(
           duration: _anDur,
           curve: AnimationsCst.acra,
@@ -352,21 +352,166 @@ class __ContentState extends State<_Content> {
             ],
           ),
         ),
-        Divider(
-          color: Colors.grey[200],
-          height: 1,
-          endIndent: 100,
-          indent: 100,
-        ),
+
         // SizedBox(
         //   height: 50,
         // ),
         Padding(
           padding: const EdgeInsets.fromLTRB(
-              SizesCst.ssz, 20, SizesCst.ssz, SizesCst.ssz),
+              SizesCst.ssz, 5, SizesCst.ssz, SizesCst.ssz),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Divider(
+                color: Colors.grey[200],
+                height: 1,
+                endIndent: 50,
+                indent: 50,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  CentredCircles(
+                    color: Colors.orange,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            color: Colors.grey,
+                            size: 15,
+                          ),
+                          Text(
+                            'Price',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: SizesCst.ftsd,
+                              fontWeight: FontsCst.wfb,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        '22.53 \$',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            color: Get.theme.colorScheme.primary,
+                            fontSize: SizesCst.ftsg,
+                            fontWeight: FontsCst.wfb,
+                            decoration: TextDecoration.underline),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  CentredCircles(
+                    color: Colors.greenAccent,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.arrow_forward_rounded,
+                            color: Colors.grey,
+                            size: 10,
+                          ),
+                          Text(
+                            'From',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: SizesCst.ftsd,
+                              fontWeight: FontsCst.wfb,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        'Azrou, Ait Melloul',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: Get.theme.colorScheme.primary,
+                          fontSize: SizesCst.ftsg,
+                          fontWeight: FontsCst.wfb,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  CentredCircles(
+                    color: Colors.red,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.arrow_forward_rounded,
+                            color: Colors.grey,
+                            size: 10,
+                          ),
+                          Text(
+                            'To',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: SizesCst.ftsd,
+                              fontWeight: FontsCst.wfb,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        'Azrou, Ait Melloul',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: Get.theme.colorScheme.primary,
+                          fontSize: SizesCst.ftsg,
+                          fontWeight: FontsCst.wfb,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Divider(
+                color: Colors.grey[200],
+                height: 1,
+                endIndent: 50,
+                indent: 50,
+              ),
+              SizedBox(
+                height: 15,
+              ),
               Text(
                 'Descreption',
                 textAlign: TextAlign.start,
