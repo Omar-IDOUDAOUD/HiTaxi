@@ -340,76 +340,76 @@ class SettingsTab extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
-            AmpereItemRowClickable(
-              onTap: () {
-                print('test 4 pass');
-                BottomSheetScreen(
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: Column(
+            Builder(builder: (context) {
+              void onTap() => BottomSheetScreen(
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: Column(
+                        children: [
+                          //
+                          _getPictureSourceRow(
+                              'camera-outline.svg', 'from camera...', () {}),
+                          _getPictureSourceRow(
+                              'image-outline.svg', 'from gallery...', () {}),
+                        ],
+                      ),
+                    ),
+                    topBar: BottomSheetTopBar(
+                        title: 'Picture source',
+                        hasDiscard: false,
+                        confirmeIconPath:
+                            AssetsExplorer.icon('close-outline.svg'),
+                        recommandedOption: null,
+                        onConfirm: () {
+                          BottomSheetScreen.hide();
+                        },
+                        onDiscard: () {
+                          BottomSheetScreen.hide();
+                        }),
+                  );
+              return AmpereItemRowClickable(
+                onTap: onTap,
+                child: Container(
+                  // height: _DEF_TILE_CONTENT_H,
+                  constraints: BoxConstraints(
+                    minHeight: _DEF_TILE_CONTENT_H,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: SizesCst.sso + 15,
+                      right: SizesCst.sso,
+                    ),
+                    child: Row(
                       children: [
-                        //
-                        _getPictureSourceRow(
-                            'camera-outline.svg', 'from camera...', () {}),
-                        _getPictureSourceRow(
-                            'image-outline.svg', 'from gallery...', () {}),
+                        SvgPicture.asset(
+                          AssetsExplorer.icon('image-outline.svg'),
+                          color: Get.theme.colorScheme.secondary,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: Text(
+                            'Change your avatar',
+                            style: TextStyle(
+                              fontSize: SizesCst.ftsv,
+                              color: Get.theme.colorScheme.primary,
+                            ),
+                          ),
+                        ),
+                        AmpereSquareButton(
+                          iconPath:
+                              AssetsExplorer.icon('color-picker-outline.svg'),
+                          onTap: onTap,
+                          color: Colors.blue,
+                          sizeFactor: .9,
+                        )
                       ],
                     ),
                   ),
-                  topBar: BottomSheetTopBar(
-                      title: 'Picture source',
-                      hasDiscard: false,
-                      confirmeIconPath:
-                          AssetsExplorer.icon('close-outline.svg'),
-                      recommandedOption: null,
-                      onConfirm: () {
-                        BottomSheetScreen.hide();
-                      },
-                      onDiscard: () {
-                        BottomSheetScreen.hide();
-                      }),
-                );
-              },
-              child: Container(
-                // height: _DEF_TILE_CONTENT_H,
-                constraints: BoxConstraints(
-                  minHeight: _DEF_TILE_CONTENT_H,
                 ),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: SizesCst.sso + 15,
-                    right: SizesCst.sso,
-                  ),
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        AssetsExplorer.icon('image-outline.svg'),
-                        color: Get.theme.colorScheme.secondary,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: Text(
-                          'Change your avatar',
-                          style: TextStyle(
-                            fontSize: SizesCst.ftsv,
-                            color: Get.theme.colorScheme.primary,
-                          ),
-                        ),
-                      ),
-                      AmpereSquareButton(
-                        iconPath:
-                            AssetsExplorer.icon('color-picker-outline.svg'),
-                        onTap: () {},
-                        color: Colors.blue,
-                        sizeFactor: .9,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
+              );
+            }),
             _TileEditableContent(
               onSubmitted: () {
                 print('on submitted success');
@@ -468,98 +468,99 @@ class SettingsTab extends StatelessWidget {
                 ],
               ),
             ),
-            AmpereItemRowClickable(
-              onTap: () {
-                BottomSheetScreen(
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: Column(
+            Builder(builder: (context) {
+              void onTap() => BottomSheetScreen(
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: Column(
+                        children: [
+                          //
+                          _getThemeModeRow('question-mark-outline.svg',
+                              'default system theme', 'SYSTEM-ID'),
+                          _getThemeModeRow(
+                              'sun-outline.svg', 'light theme', 'LIGHT-ID'),
+                          _getThemeModeRow(
+                              'moon-outline.svg', 'dark theme', 'DARK-ID'),
+                        ],
+                      ),
+                    ),
+                    topBar: BottomSheetTopBar(
+                        title: 'Change theme',
+                        recommandedOption:
+                            SheetTopBarRecommandedExitOptions.confirm,
+                        onConfirm: () {
+                          BottomSheetScreen.hide();
+                        },
+                        onDiscard: () {
+                          BottomSheetScreen.hide();
+                        }),
+                  );
+              return AmpereItemRowClickable(
+                onTap: onTap,
+                child: Container(
+                  constraints: BoxConstraints(
+                    minHeight: _DEF_TILE_CONTENT_H,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: SizesCst.sso + 15,
+                      right: SizesCst.sso,
+                    ),
+                    child: Row(
                       children: [
-                        //
-                        _getThemeModeRow('question-mark-outline.svg',
-                            'default system theme', 'SYSTEM-ID'),
-                        _getThemeModeRow(
-                            'sun-outline.svg', 'light theme', 'LIGHT-ID'),
-                        _getThemeModeRow(
-                            'moon-outline.svg', 'dark theme', 'DARK-ID'),
+                        SvgPicture.asset(
+                          AssetsExplorer.icon('color-palette-outline.svg'),
+                          color: Get.theme.colorScheme.secondary,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Change Theme',
+                                style: TextStyle(
+                                  fontSize: SizesCst.ftsv,
+                                  color: Get.theme.colorScheme.primary,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'dark',
+                                    style: TextStyle(
+                                      color: Get.theme.colorScheme.secondary,
+                                      fontSize: SizesCst.ftsh,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 3,
+                                  ),
+                                  SvgPicture.asset(
+                                    AssetsExplorer.icon('moon-outline.svg'),
+                                    color: Get.theme.colorScheme.secondary,
+                                    height: 10,
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        AmpereSquareButton(
+                          iconPath:
+                              AssetsExplorer.icon('color-picker-outline.svg'),
+                          onTap: onTap,
+                          color: Colors.blue,
+                          sizeFactor: .9,
+                        )
                       ],
                     ),
                   ),
-                  topBar: BottomSheetTopBar(
-                      title: 'Change theme',
-                      recommandedOption:
-                          SheetTopBarRecommandedExitOptions.confirm,
-                      onConfirm: () {
-                        BottomSheetScreen.hide();
-                      },
-                      onDiscard: () {
-                        BottomSheetScreen.hide();
-                      }),
-                );
-              },
-              child: Container(
-                constraints: BoxConstraints(
-                  minHeight: _DEF_TILE_CONTENT_H,
                 ),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: SizesCst.sso + 15,
-                    right: SizesCst.sso,
-                  ),
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        AssetsExplorer.icon('color-palette-outline.svg'),
-                        color: Get.theme.colorScheme.secondary,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Change Theme',
-                              style: TextStyle(
-                                fontSize: SizesCst.ftsv,
-                                color: Get.theme.colorScheme.primary,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'dark',
-                                  style: TextStyle(
-                                    color: Get.theme.colorScheme.secondary,
-                                    fontSize: SizesCst.ftsh,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 3,
-                                ),
-                                SvgPicture.asset(
-                                  AssetsExplorer.icon('moon-outline.svg'),
-                                  color: Get.theme.colorScheme.secondary,
-                                  height: 10,
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      AmpereSquareButton(
-                        iconPath:
-                            AssetsExplorer.icon('color-picker-outline.svg'),
-                        onTap: () {},
-                        color: Colors.blue,
-                        sizeFactor: .9,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
+              );
+            }),
             _TileEditableContent(
               onSubmitted: () {
                 print('on submitted success');
@@ -591,6 +592,9 @@ class SettingsTab extends StatelessWidget {
                   )
                 ],
               ),
+            ),
+            SizedBox(
+              height: 70,
             ),
           ],
         )
