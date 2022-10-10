@@ -35,7 +35,11 @@ class _AmpereClickableState extends State<AmpereClickable> {
       // onTapUp: (dts) => setState(() {
       //   _isFocus = false;
       // }),
-
+      onTapCancel: widget.onLongPress == null
+          ? () => setState(() {
+                _isFocus = false;
+              })
+          : null,
       onTap: widget.onTap,
       onLongPressStart: widget.onLongPressStart,
       onLongPressEnd: widget.onLongPressEnd,

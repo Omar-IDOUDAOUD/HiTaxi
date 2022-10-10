@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:hitaxi/controller/main/abstract_controller.dart';
 import 'package:hitaxi/core/class/AmpereDesingPackage/ampere.dart';
 import 'package:hitaxi/core/class/AmpereDesingPackage/avatar_image_viewer.dart';
+import 'package:hitaxi/core/class/AmpereDesingPackage/clickable.dart';
 import 'package:hitaxi/core/class/AmpereDesingPackage/dialog_page_route.dart';
 import 'package:hitaxi/core/class/AmpereDesingPackage/item_tile_clickable.dart';
 import 'package:hitaxi/core/class/AmpereDesingPackage/items_menu.dart';
@@ -863,7 +864,7 @@ class BottomSheetShowerButton extends StatefulWidget {
 
   final String label;
   final String iconPath;
-  Function? onTap;
+  Function()? onTap;
 
   @override
   State<BottomSheetShowerButton> createState() =>
@@ -871,77 +872,57 @@ class BottomSheetShowerButton extends StatefulWidget {
 }
 
 class BottomSheetShowerButtonState extends State<BottomSheetShowerButton> {
-  bool _isFocused = false;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        widget.onTap!();
-      },
-      onTapDown: (dets) {
-        setState(() {
-          _isFocused = true;
-          print("case 1");
-        });
-      },
-      onTapUp: (dets) {
-        setState(() {
-          _isFocused = false;
-          print("case 2");
-        });
-      },
-      onTapCancel: () {
-        setState(() {
-          _isFocused = false;
-          print("case 3");
-        });
-      },
-      child: AnimatedContainer(
-        duration: AnimationsCst.adrc,
-        height: 60,
-        foregroundDecoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(SizesCst.rsc),
-          color:
-              _isFocused ? Get.theme.colorScheme.surface.withOpacity(.3) : null,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(SizesCst.rsc),
-          border: Border.all(
-            color: Get.isDarkMode
-                ? Get.theme.colorScheme.primary
-                : Get.theme.colorScheme.secondary,
-            width: SizesCst.bsa,
-          ),
-        ),
-        alignment: Alignment.center,
-        child: Padding(
-          padding: EdgeInsets.all(15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                widget.label,
-                style: TextStyle(
-                  fontSize: SizesCst.ftsv,
-                  fontWeight: FontsCst.wfa,
-                  color: Get.isDarkMode
-                      ? Get.theme.colorScheme.primary
-                      : Get.theme.colorScheme.secondary,
-                ),
-              ),
-              SizedBox(width: 10),
-              SvgPicture.asset(
-                widget.iconPath,
+    return AmpereClickable(
+        onTap: widget.onTap,
+        builder: (focus) {
+          return AnimatedContainer(
+            duration: focus ? 50.milliseconds : 200.milliseconds,
+            height: 60,
+            foregroundDecoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(SizesCst.rsc),
+              color:
+                  focus ? Get.theme.colorScheme.surface.withOpacity(.2) : null,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(SizesCst.rsc),
+              border: Border.all(
                 color: Get.isDarkMode
                     ? Get.theme.colorScheme.primary
                     : Get.theme.colorScheme.secondary,
-                height: 20,
+                width: SizesCst.bsa,
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+            alignment: Alignment.center,
+            child: Padding(
+              padding: EdgeInsets.all(15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.label,
+                    style: TextStyle(
+                      fontSize: SizesCst.ftsv,
+                      fontWeight: FontsCst.wfa,
+                      color: Get.isDarkMode
+                          ? Get.theme.colorScheme.primary
+                          : Get.theme.colorScheme.secondary,
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  SvgPicture.asset(
+                    widget.iconPath,
+                    color: Get.isDarkMode
+                        ? Get.theme.colorScheme.primary
+                        : Get.theme.colorScheme.secondary,
+                    height: 20,
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
 
@@ -1083,7 +1064,6 @@ class DateTimeSelector extends StatefulWidget {
 class DateTimeSelectorState extends State<DateTimeSelector>
     with TickerProviderStateMixin {
   late DateTime _dateTime;
-  bool _isFocused = false;
 
   @override
   void initState() {
@@ -1093,48 +1073,31 @@ class DateTimeSelectorState extends State<DateTimeSelector>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapUp: (dts) {
-        setState(() {
-          _isFocused = false;
-        });
-      },
-      onTapDown: (dts) {
-        setState(() {
-          _isFocused = true;
-        });
-      },
-      onTapCancel: () {
-        setState(() {
-          _isFocused = false;
-        });
-      },
-      onTap: () {
-        DialogScreen(
-          _getContent(),
-          transitionDuration: Duration(milliseconds: 300),
-          hasConfirm: true,
-          hasDiscard: true,
-          confirmLabel: 'Ok',
-          discardLabel: 'Cancel',
-          recommendedOption: DialogRecommendedOption.confirm,
-          padding: SizesCst.ssa,
-          alignment: Alignment.bottomCenter,
-          scaleAnimationFrom: 1,
-        );
-      },
-      child: AnimatedContainer(
-        duration: AnimationsCst.adrc,
+    return AmpereClickable(onTap: () {
+      DialogScreen(
+        _getContent(),
+        transitionDuration: Duration(milliseconds: 300),
+        hasConfirm: true,
+        hasDiscard: true,
+        confirmLabel: 'Ok',
+        discardLabel: 'Cancel',
+        recommendedOption: DialogRecommendedOption.confirm,
+        padding: SizesCst.ssa,
+        alignment: Alignment.bottomCenter,
+        scaleAnimationFrom: 1,
+      );
+    }, builder: (focus) {
+      return AnimatedContainer(
+        duration: focus ? 50.milliseconds : 100.milliseconds,
         height: 60,
         foregroundDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(SizesCst.rsc),
-          color:
-              _isFocused ? Get.theme.colorScheme.surface.withOpacity(.3) : null,
+          color: focus ? Get.theme.colorScheme.surface.withOpacity(.2) : null,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(SizesCst.rsc),
           border: Border.all(
-            color: Get.theme.colorScheme.primary,
+            color: Get.theme.colorScheme.secondary,
             width: SizesCst.bsa,
           ),
         ),
@@ -1154,8 +1117,8 @@ class DateTimeSelectorState extends State<DateTimeSelector>
             ],
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _getContent() => Column(
@@ -1336,10 +1299,11 @@ class _CountSelectorState extends State<CountSelector> {
                 _increase();
                 widget.onChangeCount(_count);
               },
-              onLongPressStart: () {
+              onLongPress: () {},
+              onLongPressStart: (dts) {
                 _startLongIncrease();
               },
-              onLongPressEnd: () {
+              onLongPressEnd: (dts) {
                 _stopCounter();
                 widget.onChangeCount(_count);
               },
@@ -1355,10 +1319,11 @@ class _CountSelectorState extends State<CountSelector> {
                 _decrease();
                 widget.onChangeCount(_count);
               },
-              onLongPressStart: () {
+              onLongPress: () {},
+              onLongPressStart: (dts) {
                 _startLongDecrease();
               },
-              onLongPressEnd: () {
+              onLongPressEnd: (dts) {
                 _stopCounter();
                 widget.onChangeCount(_count);
               },
@@ -1372,9 +1337,10 @@ class _CountSelectorState extends State<CountSelector> {
 }
 
 class RateRow extends StatelessWidget {
-  const RateRow({Key? key, required this.rate, double this.height = 15}) : super(key: key);
+  const RateRow({Key? key, required this.rate, double this.height = 15})
+      : super(key: key);
   final int rate;
-  final double height; 
+  final double height;
   @override
   Widget build(BuildContext context) {
     return Row(
