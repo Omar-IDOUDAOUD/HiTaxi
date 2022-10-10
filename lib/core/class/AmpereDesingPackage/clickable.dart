@@ -6,12 +6,19 @@ import 'package:flutter/widgets.dart';
 typedef _builder = Widget Function(bool isFocus);
 
 class AmpereClickable extends StatefulWidget {
-  const AmpereClickable(
-      {Key? key, required this.builder, this.onTap, this.onLongPress})
-      : super(key: key);
+  const AmpereClickable({
+    Key? key,
+    required this.builder,
+    this.onTap,
+    this.onLongPress,
+    this.onLongPressStart,
+    this.onLongPressEnd,
+  }) : super(key: key);
   final _builder builder;
   final Function()? onTap;
   final Function()? onLongPress;
+  final Function(LongPressStartDetails details)? onLongPressStart;
+  final Function(LongPressEndDetails details)? onLongPressEnd;
 
   @override
   State<AmpereClickable> createState() => _AmpereClickableState();
@@ -28,10 +35,10 @@ class _AmpereClickableState extends State<AmpereClickable> {
       // onTapUp: (dts) => setState(() {
       //   _isFocus = false;
       // }),
-      onTapCancel: () => setState(() {
-        _isFocus = false;
-      }),
+
       onTap: widget.onTap,
+      onLongPressStart: widget.onLongPressStart,
+      onLongPressEnd: widget.onLongPressEnd,
       onLongPressDown: (dts) => setState(() {
         _isFocus = true;
       }),
