@@ -27,7 +27,7 @@ class HiTaxi extends StatelessWidget {
     return GetMaterialApp(
       themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
-      theme: ThemesCst.light,
+      theme: ThemesCst.dark,
       darkTheme: ThemesCst.dark,
       initialRoute: RoutesCst.mainPassenger,
       defaultTransition: Transition.cupertinoDialog,

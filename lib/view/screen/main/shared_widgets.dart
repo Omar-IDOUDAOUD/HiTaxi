@@ -640,12 +640,17 @@ class SettingsTab extends StatelessWidget {
         radius: 10,
       );
 
-  _getThemeModeRow(iconPath, text, rowId) => AmpereItemRowClickable(
+  _getThemeModeRow(iconPath, text, rowId) => AmpereClickable(
         onTap: () {
           _themeSelectedRadioId.value = rowId;
         },
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+        builder: (focus) => AnimatedContainer(
+          duration: AnimationsCst.adrc,
+          decoration: BoxDecoration(
+            color: focus ? Colors.grey.withOpacity(.2) : Colors.transparent,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
           child: Row(
             children: [
               SvgPicture.asset(
@@ -671,9 +676,12 @@ class SettingsTab extends StatelessWidget {
                 child: ValueListenableBuilder(
                   valueListenable: _themeSelectedRadioId,
                   builder: (context, c, v) {
-                    return AmpereRadio(
-                      sharedValue: _themeSelectedRadioId.value,
-                      id: rowId,
+                    return SvgPicture.asset(
+                      AssetsExplorer.icon('checkmark-outline.svg'),
+                      height: 22.5,
+                      color: rowId == _themeSelectedRadioId.value
+                          ? Get.theme.colorScheme.primary
+                          : Colors.transparent,
                     );
                   },
                 ),
@@ -681,7 +689,6 @@ class SettingsTab extends StatelessWidget {
             ],
           ),
         ),
-        radius: 10,
       );
 }
 
