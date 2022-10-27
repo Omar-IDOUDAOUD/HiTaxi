@@ -603,9 +603,15 @@ class SettingsTab extends StatelessWidget {
   }
 
   _getPictureSourceRow(iconPath, text, onTap) => //
-      AmpereItemRowClickable(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+      AmpereClickable(
+        onTap: onTap,
+        builder: (focus) => AnimatedContainer(
+          duration: AnimationsCst.adrc,
+          decoration: BoxDecoration(
+            color: focus ? Colors.grey.withOpacity(.2) : Colors.transparent,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: Row(
             children: [
               SvgPicture.asset(
@@ -637,7 +643,6 @@ class SettingsTab extends StatelessWidget {
             ],
           ),
         ),
-        radius: 10,
       );
 
   _getThemeModeRow(iconPath, text, rowId) => AmpereClickable(
