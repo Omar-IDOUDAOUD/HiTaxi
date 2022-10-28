@@ -4,6 +4,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hitaxi/controller/main/passenger_controller.dart';
 import 'package:hitaxi/core/class/AmpereDesingPackage/clickable.dart';
 import 'package:hitaxi/core/class/AmpereDesingPackage/squar_button.dart';
 import 'package:hitaxi/core/constants/constants.dart';
@@ -107,7 +108,11 @@ class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
                 minWidth: 65,
                 height: 65,
                 shape: CircleBorder(),
-                onPressed: Get.back,
+                onPressed: () {
+                  Get.find<PassengerController>()
+                      .startTravelDetailsRouteAnimation(openingState: true);
+                  Get.back();
+                },
                 child: SvgPicture.asset(
                   AssetsExplorer.icon('back-icon.svg'),
                   height: 15,

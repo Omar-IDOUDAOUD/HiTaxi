@@ -28,32 +28,14 @@ class Tab1 extends StatelessWidget {
         right: SizesCst.ssa + 10,
       ),
       physics: BouncingScrollPhysics(),
-      itemBuilder: (BuildContext, int) => OpenContainer(
-        middleColor: Get.theme.backgroundColor,
-        closedColor: Get.theme.backgroundColor,
-        openColor: Get.theme.backgroundColor,
-        transitionType: ContainerTransitionType.fade,
-        closedElevation: 0,
-        openElevation: 0,
-        transitionDuration: Duration(milliseconds: 500),
-        routeSettings: RouteSettings(arguments: ''),
-        closedShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        closedBuilder: (ctx, openPageAction) {
-          return ConveyanceCard(
-            onTap: () {
-              _controller
-                  .startTravelDetailsRouteAnimation(show: false)
-                  .then((v) => openPageAction());
-            },
-          );
-        },
-        openBuilder: (ctx, backAction) {
-          return TravelDetails();
-        },
-        onClosed: (_) {
-          _controller.startTravelDetailsRouteAnimation(show: true);
+      itemBuilder: (BuildContext, int) => ConveyanceCard(
+        onTap: () {
+          _controller.startTravelDetailsRouteAnimation(openingState: false).then(
+                (value) => Get.toNamed(
+                  RoutesCst.mainPassengerTravelDetails,
+                  arguments: ['arguments here (travel details model)'],
+                ),
+              );
         },
       ),
       itemCount: 5,
