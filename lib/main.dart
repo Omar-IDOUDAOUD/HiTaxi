@@ -8,6 +8,7 @@ import 'package:hitaxi/view/screen/main/passenger/pages/home/page.dart'
     as PassengerHome;
 import 'package:hitaxi/view/screen/main/passenger/pages/travel_details/page.dart'
     as PassengerTravelDetail;
+import 'package:hitaxi/view/screen/main/passenger/pages/travel_details/page.dart';
 import 'package:hitaxi/view/screen/sing/singin.dart';
 import 'package:hitaxi/view/screen/sing/singup.dart';
 import 'package:hitaxi/view/screen/test/test.dart';
@@ -30,7 +31,7 @@ class HiTaxi extends StatelessWidget {
       theme: ThemesCst.dark,
       darkTheme: ThemesCst.dark,
       initialRoute: RoutesCst.mainPassenger,
-      defaultTransition: Transition.cupertinoDialog,
+      defaultTransition: Transition.cupertino,
       transitionDuration: 500.milliseconds,
       getPages: [
         GetPage(
@@ -49,10 +50,14 @@ class HiTaxi extends StatelessWidget {
           page: () => PassengerHome.Home(),
           binding: PassengerBinding(),
         ),
-        GetPage(  
+        GetPage(
           name: RoutesCst.mainPassengerTravelDetails,
           page: () => PassengerTravelDetail.TravelDetails(),
           arguments: {'arg': 'this an arg'},
+        ),
+        GetPage(
+          name: RoutesCst.mainPassengerTravelDetails,
+          page: () => TravelDetails(),
         ),
         GetPage(
           name: RoutesCst.testFrame,
