@@ -80,18 +80,19 @@ class PassengerController extends GetxController
     _canChangePage = false;
   }
 
-  Future<void> startTravelDetailsRouteAnimation({bool show = true}) async {
-    if (show) {
-      await Future.delayed(Duration(milliseconds: 500));
-      canShowSearchCard = show;
-      canShowNavigationBar = show;
-      update([NAVIGATIONBAR_ID, SEARCHCARD_ID]);
-      return;
-    } else {
-      canShowSearchCard = show;
-      canShowNavigationBar = show;
+  Future<void> startTravelDetailsRouteAnimation(
+      {bool openingState = true}) async {
+    if (openingState) {
+      canShowSearchCard = openingState;
+      canShowNavigationBar = openingState;
       update([NAVIGATIONBAR_ID, SEARCHCARD_ID]);
       return await Future.delayed(Duration(milliseconds: 200));
+    } else {
+      await Future.delayed(Duration(milliseconds: 500));
+      canShowSearchCard = openingState;
+      canShowNavigationBar = openingState;
+      update([NAVIGATIONBAR_ID, SEARCHCARD_ID]);
+      return;
     }
   }
 }
